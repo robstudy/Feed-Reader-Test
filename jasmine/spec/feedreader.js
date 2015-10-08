@@ -14,7 +14,7 @@ $(function() {
         /* Expect allFeeds to be Defined and
         * that the length of the array is not 0. 
         */
-        it('all are defined', function() {
+        it('are defined', function() {
             expect(allFeeds).toBeDefined();
             expect(allFeeds.length).not.toBe(0);
         });
@@ -42,7 +42,7 @@ $(function() {
     describe('The menu', function(){ 
 
         //Expect menu-hidden to be the default on page load.
-         it('menu hidden by default', function(){
+         it('is hidden by default', function(){
             expect($('body').hasClass('menu-hidden')).toBe(true);
          });
 
@@ -50,7 +50,7 @@ $(function() {
           * click menu-icon-link and expect body to have no menu-hidden class.
           * click again nand expect body to have menu-hidden class.
           */
-          it('menu changes visibility when clicked', function(){
+          it('changes visibility when clicked', function(){
             $('.menu-icon-link').trigger('click');
             expect($('body').hasClass('menu-hidden')).toBe(false);
 
@@ -78,13 +78,13 @@ $(function() {
         });
      });
 
-    //Text each new feed
+    //Test each new feed
     describe('New Feed Selection', function(){
         //variables to hold the last instances of name and URL in allFeeds
         var holdFeed;
         var holdNameFeed;
 
-        it('new feed changes content', function(){
+        it('changes content', function(){
             /*For each index, if on the first index and holdFeed is not defined,
             * variables holdNameFeed and holdFeed will store url and name. Expect
             * both to be defined.
