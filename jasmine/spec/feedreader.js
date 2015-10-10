@@ -91,7 +91,7 @@ $(function() {
 	    		loadFeed(1, function(){
 	    			//load index 1 feed and its innterHtml
 	    			secondFeed = $('.feed').html();
-	    			done();
+	    			loadFeed(0, done);
 	    		});
 	    	});
 	    });
