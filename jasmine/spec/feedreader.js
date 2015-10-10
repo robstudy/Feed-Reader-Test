@@ -19,7 +19,6 @@ $(function() {
             expect(allFeeds.length).not.toBe(0);
         });
 
-
         //First, expect url to be defined.
         //Next, expect url to be truthy. Empty strings evaluate to falsey.
          it('url is defined and not empty', function(){
@@ -36,6 +35,7 @@ $(function() {
                 expect(feed.name).toBeTruthy();
             });
          });
+         
     });
 
     //Text the menu
@@ -65,46 +65,41 @@ $(function() {
 
         //Before feeds are loaded setTimeout to give time for async function to complete
         beforeEach(function(done){
-            setTimeout(function(){
-                loadFeed(0, done);
-            }, 1000);
+            loadFeed(0, done);
         });
 
         //Checks that there is more than .entry element loaded
-        it("has at least 1 entry after loadFeed function is called", function(done) {
+        it("has at least 1 entry after loadFeed function is called", function() {
             var entries = $(".entry").length;
             expect(entries).toBeGreaterThan(0);
-            done();
         });
+
      });
 
     //Test each new feed
     describe('New Feed Selection', function(){
-        //variables to hold the last instances of name and URL in allFeeds
-        var holdFeed;
-        var holdNameFeed;
+    	/*Will use JQuery .html() to read innerHTML of the first two
+    	 *feed entries to make sure the content changes
+    	 */
 
-        it('changes content', function(){
-            /*For each index, if on the first index and holdFeed is not defined,
-            * variables holdNameFeed and holdFeed will store url and name. Expect
-            * both to be defined.
-            * Go through each feed and compare to the last feed. Expect new feed to
-            * not be equal to the last feed. Replace hold variables with new feed.
-            */
-            allFeeds.forEach(function(feed){
-                if(!holdFeed){
-                    holdNameFeed = feed.name;
-                    holdFeed = feed.url;
-                    expect(holdFeed).toBeDefined();
-                    expect(holdNameFeed).toBeDefined();
-                } 
-                else {
-                    expect(feed.name).not.toBe(holdNameFeed);
-                    expect(feed.url).not.toBe(holdFeed);
-                    holdNameFeed = feed.name;
-                    holdFeed = feed.url;
-                }
-            });
-        });
+	    var firstFeed, secondFeed;
+
+	    beforeEach(function(done){
+	    	loadFeed(0, function(){
+	    		//load index 0 feed and its innterHtml
+	    		firstFeed = $('.feed').html();
+	    		loadFeed(1, function(){
+	    			//load index 1 feed and its innterHtml
+	    			secondFeed = $('.feed').html();
+	    			done();
+	    		});
+	    	});
+	    });
+
+	   it('changes content', function(){
+	   		expect(firstFeed).not.toBe(secondFeed);
+	   });
+
     });
+
 }());
