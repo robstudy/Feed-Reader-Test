@@ -12,7 +12,7 @@ $(function() {
     //Text RSS Feeds allFeeds array
     describe('RSS Feeds', function() {
         /* Expect allFeeds to be Defined and
-        * that the length of the array is not 0. 
+        * that the length of the array is not 0.
         */
         it('are defined', function() {
             expect(allFeeds).toBeDefined();
@@ -35,11 +35,11 @@ $(function() {
                 expect(feed.name).toBeTruthy();
             });
          });
-         
+
     });
 
     //Text the menu
-    describe('The menu', function(){ 
+    describe('The menu', function(){
 
         //Expect menu-hidden to be the default on page load.
          it('is hidden by default', function(){
@@ -63,7 +63,7 @@ $(function() {
     //Text initial entries
     describe('Initial Entries', function(){
 
-        //Before feeds are loaded setTimeout to give time for async function to complete
+        //Before the it function, load the first feed
         beforeEach(function(done){
             loadFeed(0, done);
         });
@@ -78,27 +78,28 @@ $(function() {
 
     //Test each new feed
     describe('New Feed Selection', function(){
-    	/*Will use JQuery .html() to read innerHTML of the first two
+
+      /*Will use JQuery .html() to read innerHTML of the first two
     	 *feed entries to make sure the content changes
     	 */
 
-	    var firstFeed, secondFeed;
+      var firstFeed, secondFeed;
 
-	    beforeEach(function(done){
-	    	loadFeed(0, function(){
-	    		//load index 0 feed and its innterHtml
-	    		firstFeed = $('.feed').html();
-	    		loadFeed(1, function(){
-	    			//load index 1 feed and its innterHtml
-	    			secondFeed = $('.feed').html();
-	    			loadFeed(0, done);
-	    		});
-	    	});
-	    });
+      beforeEach(function(done){
+        loadFeed(0, function(){
+        //load index 0 feed and its innterHtml
+          firstFeed = $('.feed').html();
+          loadFeed(1, function(){
+          //load index 1 feed and its innterHtml
+          secondFeed = $('.feed').html();
+          loadFeed(0, done);
+          });
+        });
+      });
 
-	   it('changes content', function(){
-	   		expect(firstFeed).not.toBe(secondFeed);
-	   });
+        it('changes content', function(){
+          expect(firstFeed).not.toBe(secondFeed);
+        });
 
     });
 
