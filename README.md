@@ -10,3 +10,5 @@ There are seven tests being run:
 5. The menu changes visibility when menu button is clicked.
 6. There is at least one entry after the loadFeed() function is called.
 7. That the content of the feeds change when a new one is loaded.
+
+Current Issue: Repository out of date, RSS feeds need updating
